@@ -33,19 +33,19 @@ const MyStorage = ({ title, brut, iskonto, toplam, kdv, genelToplam, sevkiyatOpt
                     <span>{genelToplam}₺</span>
                 </div>
                 <div>
-                    <label className="block text-gray-600 mb-1">Sevkiyat:</label>
-
-
+                    <label className="block text-gray-600 mb-1">
+                    Sevkiyat:
                     <Select
                         label="Seçiniz"
                         className="max-w-xs"
                     >
-                        {sevkiyatOptions.map((option:any, index:any) => (
-                            <SelectItem key={option.value}>
+                        {sevkiyatOptions.map((option: any) => (
+                        <SelectItem key={option.value}>
                             {option.label}
-                            </SelectItem>
+                        </SelectItem>
                         ))}
                     </Select>
+                    </label>
 
 
                     {sevkiyatNote && (
@@ -53,8 +53,15 @@ const MyStorage = ({ title, brut, iskonto, toplam, kdv, genelToplam, sevkiyatOpt
                     )}
                 </div>
                 <div>
-                    <label className="block text-gray-600 mb-1">Sipariş Mesajı:</label>
-                    <Input placeholder="Sipariş mesajınızı giriniz..." className="w-full" />
+                    <label htmlFor="siparisMesaji" className="block text-gray-600 mb-1">
+                    Sipariş Mesajı:
+                    </label>
+                    <Input
+                    id="siparisMesaji"
+                    placeholder="Sipariş mesajınızı giriniz..."
+                    className="w-full"
+                    />
+
                 </div>
             </CardBody>
             <CardFooter className="p-4 flex justify-center">
