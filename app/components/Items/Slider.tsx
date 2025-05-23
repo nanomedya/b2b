@@ -44,9 +44,6 @@ const Slider: React.FC<Slider> = ({
   const [currentSlide, setCurrentSlide] = useState(0);
   const [loaded, setLoaded] = useState(false);
 
-  if (images.length === 0) {
-    return <>Yükleniyor</>;
-  }
 
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
     initial: 0,
@@ -63,6 +60,11 @@ const Slider: React.FC<Slider> = ({
       setLoaded(true);
     },
   });
+
+  
+  if (images.length === 0) {
+    return <>Yükleniyor</>;
+  }
 
   return (
     <>
