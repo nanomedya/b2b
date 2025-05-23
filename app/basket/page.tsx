@@ -163,7 +163,7 @@ export default function Basket(): JSX.Element {
                               <TableCell>{item.product.stock_no}</TableCell>
                               <TableCell>
                                 <Tooltip content={<Image width={130} height={130} src={item.product.image} />}>
-                                  <Image width={50} height={50} src={item.product.image} radius="sm" />
+                                  <Image width={50} height={50} src={item.product.image} radius="sm" alt="" />
                                 </Tooltip>
                                 {item.product.title}
                               </TableCell>

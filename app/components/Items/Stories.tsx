@@ -49,9 +49,7 @@ const Stories: React.FC<SliderProps> = ({
     const [currentSlide, setCurrentSlide] = useState(0);
     const [loaded, setLoaded] = useState(false);
 
-    if (images.length === 0) {
-        return <>Yükleniyor</>;
-    }
+   
 
     const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
         initial: 0,
@@ -88,7 +86,11 @@ const Stories: React.FC<SliderProps> = ({
             },
         },
     });
-
+    
+    if (images.length === 0) {
+        return <>Yükleniyor</>;
+    }
+    
     return (
         <div className="navigation-wrapper">
             <div ref={sliderRef} className="keen-slider">

@@ -256,11 +256,11 @@ const handleSearch = (query: string, brand: string, instock: "1" | "0") => {
                         content={
                           <div className="p-2">
                             <Image width={130} height={130} src={product.image}
-                              fallbackSrc="https://via.placeholder.com/130x130" />
+                              fallbackSrc="https://via.placeholder.com/130x130" alt="" />
                           </div>
                         }
                       >
-                        <Image width={30} height={30} src={product.image} fallbackSrc="https://via.placeholder.com/130x130" />
+                        <Image width={30} height={30} src={product.image} alt="" fallbackSrc="https://via.placeholder.com/130x130" />
                       </Tooltip>
                     </TableCell>
 

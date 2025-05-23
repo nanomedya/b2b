@@ -336,7 +336,7 @@ const ChooseBasket: React.FC = () => {
                                 {isNewBasketCreate ? (
                                     <div className="relative flex flex-col gap-4">
                                         <Input value={basketName}
-                                            onChange={(e) => setBasketName(e.target.value)} placeholder="Sepet Adı" autoFocus />
+                                            onChange={(e) => setBasketName(e.target.value)} placeholder="Sepet Adı" />
                                         <Switch isSelected={isDefault} onValueChange={setIsDefault}>Varsayılan olarak ayarla</Switch>;
                                     </div>
                                 ) : (

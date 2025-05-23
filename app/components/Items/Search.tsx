@@ -85,7 +85,7 @@ export default function SearchBox({
           </div>
 
           <Input
-            autoFocus
+          
             classNames={{
               base: "max-w-full h-14",
               mainWrapper: "h-full",

@@ -5,11 +5,11 @@ interface LogoProps extends React.ImgHTMLAttributes<HTMLImageElement> {
 }
 
 const Logo: React.FC<LogoProps> = (props) => (
-  <img src="/static/logo.png" {...props} />
+  <img src="/static/logo.png" alt="" {...props} />
 );
 
 const Logo2: React.FC<LogoProps> = (props) => (
-  <img src="/static/logo2.png" {...props} />
+  <img src="/static/logo2.png" alt="" {...props} />
 );
 
 export default Logo;

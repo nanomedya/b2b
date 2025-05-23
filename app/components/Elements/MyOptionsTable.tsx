@@ -43,7 +43,7 @@ export default function MyOptionsTable() {
           {data.map((row) => (
             <TableRow key={row.id}>
               <TableCell>
-                <Image width={30} height={30} src={row.image} /></TableCell>
+                <Image width={30} height={30} src={row.image} alt="" /></TableCell>
               <TableCell>{row.code}</TableCell>
               <TableCell>{row.name}</TableCell>
               <TableCell>{row.manufacturer}</TableCell>
