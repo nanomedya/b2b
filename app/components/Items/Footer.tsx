@@ -84,7 +84,7 @@ export default function Footer(): JSX.Element {
             <div className="relative box_items flex flex-row flex-wrap px-5 gap-4 justify-center items-start">
               <div className="box_content">
                 <h4 className="font-semibold text-white w-full mb-4">
-                  PintegB2B'i keşfet
+                  {"PintegB2B'i keşfet"}
                 </h4>
                 <div className="box_items_content flex flex-col flex-wrap gap-4">
                   {menu1.map((item: any) => (

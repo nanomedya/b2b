@@ -282,11 +282,11 @@ const handleSearch = (query: string, brand: string, instock: "1" | "0") => {
                                 <span className="font-semibold">{product.info.unit_of_purchased}</span>
                               </div>
                               <div className="item_wrap text-tiny">
-                                <span className="font-semibold">KDV'siz adet fiyatı:</span>
+                                <span className="font-semibold">{"KDV'siz adet fiyatı:"}</span>
                                 <span className="font-semibold">{product.info.unit_price_excluding_vat} {product.info.currency}</span>
                               </div>
                               <div className="item_wrap text-tiny">
-                                <span className="font-semibold text-[#ffa200]">KDV'li adet fiyatı:</span>
+                                <span className="font-semibold text-[#ffa200]">{"KDV'li adet fiyatı:"}</span>
                                 <span className="font-semibold">{product.info.unit_price_including_vat} {product.info.currency}</span>
                               </div>
                             </div>

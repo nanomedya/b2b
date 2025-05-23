@@ -130,11 +130,11 @@ export default function Basket(): JSX.Element {
                           <TableColumn>Marka</TableColumn>
                           <TableColumn>KDV</TableColumn>
                           <TableColumn>Liste Fiyatı</TableColumn>
-                          <TableColumn>KDV'li Liste Fiyatı</TableColumn>
+                          <TableColumn>{"KDV'li Liste Fiyatı"}</TableColumn>
                           <TableColumn>İskonto</TableColumn>
                           <TableColumn>Net Fiyat</TableColumn>
                           <TableColumn>Tutar</TableColumn>
-                          <TableColumn>KDV'li Tutar</TableColumn>
+                          <TableColumn>{"KDV'li Tutar"}</TableColumn>
                           <TableColumn>Miktar</TableColumn>
                           <TableColumn>Ank.</TableColumn>
                           <TableColumn>İst.</TableColumn>

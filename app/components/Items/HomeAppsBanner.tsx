@@ -13,7 +13,7 @@ export default function HomeAppsBanner() {
         "
         >
           <h4 className="font-bold text-2xl text-black mb-3">
-            AcilSepet'i indir!
+            {"AcilSepet'i indir!"}
           </h4>
           <p className="text-black font-normal text-lg mb-10">
             İstediğiniz ürünleri hemen kapınıza getirelim.
