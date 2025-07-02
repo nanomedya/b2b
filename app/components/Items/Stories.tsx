@@ -57,7 +57,7 @@ const Stories: React.FC<SliderProps> = ({
         mode: 'snap',
         slides: {
             origin: 'center',
-            perView: 5,
+            perView: 6,
         },
         slideChanged(slider) {
             setCurrentSlide(slider.track.details.rel)
@@ -69,13 +69,13 @@ const Stories: React.FC<SliderProps> = ({
             '(min-width: 992px)': {
                 loop: false,
                 slides: {
-                    perView: 5,
+                    perView: 6,
                 },
             },
             '(max-width: 992px)': {
                 loop: false,
                 slides: {
-                    perView: 3,
+                    perView: 4,
                 },
             },
             '(max-width: 500px)': {

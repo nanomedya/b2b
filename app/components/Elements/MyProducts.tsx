@@ -1,21 +1,21 @@
 "use client"
 import React, { useEffect, useMemo, useState } from "react";
-import {  Table,  TableHeader,  TableBody,  TableColumn,  TableRow,  TableCell} from "@heroui/table";
-import {Button, ButtonGroup} from "@heroui/button";
-import {Image} from "@heroui/image";
-import {Chip} from "@heroui/chip";
-import {Pagination, PaginationItem, PaginationCursor} from "@heroui/pagination";
-import {Tooltip} from "@heroui/tooltip";
-import {Tabs, Tab} from "@heroui/tabs";
-import {Input} from "@heroui/input";
-import {Spinner} from "@heroui/spinner";
-import {Card, CardHeader, CardBody, CardFooter} from "@heroui/card";
-import { Info, Eye, RefreshCw } from "react-feather";
+import { Table, TableHeader, TableBody, TableColumn, TableRow, TableCell } from "@heroui/table";
+import { Button, ButtonGroup } from "@heroui/button";
+import { Image } from "@heroui/image";
+import { Chip } from "@heroui/chip";
+import { Pagination, PaginationItem, PaginationCursor } from "@heroui/pagination";
+import { Tooltip } from "@heroui/tooltip";
+import { Tabs, Tab } from "@heroui/tabs";
+import { Input } from "@heroui/input";
+import { Spinner } from "@heroui/spinner";
+import { Card, CardHeader, CardBody, CardFooter } from "@heroui/card";
+import { Info, Eye, RefreshCw, Plus, Minus, Trash } from "react-feather";
 import { TABLE_DATA } from "@/data/data";
 import { ColumnsProps, RowsProps } from "@/types";
-import {  Modal,  ModalContent,  ModalHeader,  ModalBody,  ModalFooter} from "@heroui/modal";
+import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter } from "@heroui/modal";
 
-import {useDisclosure } from "@nextui-org/react";
+import { useDisclosure } from "@nextui-org/react";
 import MyInfoTable from "./MyInfoTable";
 import SearchBox from "../Items/Search";
 import MyOptionsTable from "./MyOptionsTable";
@@ -146,24 +146,24 @@ export default function MyProducts() {
     //   ...prev, 
     //   { name: newColumnName, key: newColumnName.toLowerCase(), sortable: false }
     // ]);
-  
+
     setIsNewColumnOpen(false);
   };
 
-const handleSearch = (query: string, brand: string, instock: "1" | "0") => {
-  setFormData((prev) => ({ ...prev, query, brand, instock }));
+  const handleSearch = (query: string, brand: string, instock: "1" | "0") => {
+    setFormData((prev) => ({ ...prev, query, brand, instock }));
 
-  const currentUrl = new URL(window.location.href);
-  currentUrl.searchParams.delete("query");
-  currentUrl.searchParams.delete("brand");
-  currentUrl.searchParams.delete("instock");
+    const currentUrl = new URL(window.location.href);
+    currentUrl.searchParams.delete("query");
+    currentUrl.searchParams.delete("brand");
+    currentUrl.searchParams.delete("instock");
 
-  if (query) currentUrl.searchParams.set("query", query);
-  if (brand) currentUrl.searchParams.set("brand", brand);
-  if (instock === "1") currentUrl.searchParams.set("instock", "1");
+    if (query) currentUrl.searchParams.set("query", query);
+    if (brand) currentUrl.searchParams.set("brand", brand);
+    if (instock === "1") currentUrl.searchParams.set("instock", "1");
 
-  window.history.pushState({}, "", currentUrl.toString());
-};
+    window.history.pushState({}, "", currentUrl.toString());
+  };
 
 
 
@@ -191,7 +191,7 @@ const handleSearch = (query: string, brand: string, instock: "1" | "0") => {
 
 
   return (
-    <div className={`flex flex-wrap gap-3 px-4 ${dataRow.length > 0 && 'flex-col-reverse'}`}>
+    <div className={`flex flex-wrap gap-3 px-4`}>
 
       <Modal isOpen={isNewColumnOpen} onOpenChange={onCloseNewColumnModal}>
         <ModalContent className="text-black dark:text-white">
@@ -214,13 +214,14 @@ const handleSearch = (query: string, brand: string, instock: "1" | "0") => {
         </ModalContent>
       </Modal>
 
-<StoriesBox />
+      <StoriesBox />
       <Card shadow="sm" className="w-full">
+
         <CardBody className="gap-6">
 
 
           <div className=" mb-4">
-             
+
             <SearchBox handleSearch={handleSearch} />
           </div>
           {dataRow.length > 0 && (
@@ -308,11 +309,11 @@ const handleSearch = (query: string, brand: string, instock: "1" | "0") => {
                     <TableCell>{product.name}</TableCell>
                     <TableCell>{product.manufacturer}</TableCell>
                     <TableCell>{product.oemNo}</TableCell>
-                    <TableCell>
+                    {/*<TableCell>
                       <Chip color={product.izmir ? "success" : "danger"}>
                         {product.izmir ? "Var" : "Yok"}
                       </Chip>
-                    </TableCell>
+                    </TableCell>*/}
                     <TableCell>
                       <Chip color={product.ankara ? "success" : "danger"}>
                         {product.ankara ? "Var" : "Yok"}
@@ -323,11 +324,12 @@ const handleSearch = (query: string, brand: string, instock: "1" | "0") => {
                         {product.istanbul ? "Var" : "Yok"}
                       </Chip>
                     </TableCell>
-                    <TableCell>
+
+                    {/*<TableCell>
                       <Chip color={product.firstIndustry ? "success" : "danger"}>
                         {product.firstIndustry ? "Var" : "Yok"}
                       </Chip>
-                    </TableCell>
+                    </TableCell>*/}
 
                     <TableCell>
                       {product.discount ? (
@@ -382,20 +384,55 @@ const handleSearch = (query: string, brand: string, instock: "1" | "0") => {
 
                     <TableCell>{product.priceInclVat}</TableCell>
                     <TableCell>
-                      <Input
-                        value={String(quantities[product.id] || 1)}
-                        isDisabled={!product.quantity}
-                        isInvalid={errors[product.id] || false}
-                        placeholder={`Stok: ${product.quantity}`}
-                        min={1}
-                        width={100}
-                        max={product.quantity}
-                        maxLength={3}
-                        className="text-center"
-                        errorMessage={errors[product.id] ? "Stoktan olmayan bir değer girdiniz" : ""}
-                        onChange={(e) => handleQuantityChange(product.id, e.target.value)}
-                      />
+                      <div className="flex items-center justify-center">
+                        <Button
+                          onClick={() => {
+                            const current = quantities[product.id] || 1;
+                            if (current > 1) {
+                              handleQuantityChange(product.id, String(current - 1));
+                            } else {
+                              handleQuantityChange(product.id, "0"); // Veya sıfır değeri, senin mantığına göre
+                            }
+                          }}
+                          radius="sm"
+                          size="sm"
+                          isIconOnly
+                          className="bg-[#fff] dark:bg-slate-700 dark:text-white text-black rounded-l-lg rounded-r-none mr-2"
+                        >
+                          <Minus />
+                        </Button>
+
+                        <Input
+                          value={String(quantities[product.id] || 1)}
+                          isDisabled={!product.quantity}
+                          isInvalid={errors[product.id] || false}
+                          placeholder={`Stok: ${product.quantity}`}
+                          min={1}
+                       //   width={100}
+                         // max={product.quantity}
+                         // maxLength={3}
+                        //  className="text-center"
+                         // errorMessage={errors[product.id] ? "Stoktan olmayan bir değer girdiniz" : ""}
+                          onChange={(e) => handleQuantityChange(product.id, e.target.value)}
+                        />
+
+                        <Button
+                          onClick={() => {
+                            const current = quantities[product.id] || 1;
+
+                              handleQuantityChange(product.id, String(current + 1));
+                           
+                          }}
+                          radius="sm"
+                          size="sm"
+                          isIconOnly
+                          className="bg-[#fff] dark:bg-slate-700 dark:text-white text-black rounded-r-lg rounded-l-none  mr-2"
+                        >
+                          <Plus />
+                        </Button>
+                      </div>
                     </TableCell>
+
                     <TableCell>
                       <Tooltip content="Sepete Ekle" className="text-white" color="warning" showArrow>
                         <AddBasket issingle={true} product={product} myquantity={selectedQuantities[product.id] || 1} />
@@ -492,7 +529,7 @@ const handleSearch = (query: string, brand: string, instock: "1" | "0") => {
         </CardBody>
       </Card>
 
-     
+
     </div>
 
   );

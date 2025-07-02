@@ -71,14 +71,13 @@ const AddBasket: React.FC<AddBasketProps> = ({ product, issingle = false, myquan
             </Tooltip>
           ) : (
             <Button
-              isIconOnly
-              radius="md"
-              size="md"
-              onClick={() => handleBasketUpdate(myquantity)}
-              className="absolute right-0 top-0 z-10 bg-[#ffefd4] text-black"
-            >
-              <Plus />
-            </Button>
+                onClick={() => handleBasketUpdate(myquantity)}
+                radius="lg"
+                size="lg"
+                className="bg-[#ffefd4] text-black px-3 font-semibold"
+              >
+                Sepete Ekle
+              </Button>
           )
         ) : (
           <Button
@@ -93,14 +92,25 @@ const AddBasket: React.FC<AddBasketProps> = ({ product, issingle = false, myquan
       ) : (
         <div className="grid grid-cols-3 w-32 gap-0">
           {quantity === 0 ? (
-            <div className="col-span-3">
-              <Button
-                onClick={() => handleBasketUpdate(myquantity)}
-                radius="lg"
-                size="lg"
-                className="bg-[#ffefd4] text-black px-10 font-semibold"
+            <div className="col-span-12">
+               <Button
+              isIconOnly
+              radius="sm"
+              size="sm"
+              onClick={() => handleBasketUpdate(myquantity)}
+              className="bg-[#ffefd4] text-black px-3 font-semibold text-right"
+            >
+              <Plus />
+            </Button>
+            <Button
+                onClick={() =>  handleBasketUpdate(-1) }
+                radius="sm"
+                size="sm"
+                isIconOnly
+                fullWidth
+                className="bg-[#ffefd4] text-black px-3 font-semibold text-right mx-3"
               >
-                Sepete Ekle
+                {quantity > -1 ? <Minus  /> : <Trash  />}
               </Button>
             </div>
           ) : (
