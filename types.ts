@@ -62,6 +62,7 @@ export type RowsProps = {
   priceExclVat: PriceExclVatProps;
   priceInclVat: string;
   totalVat: string;
+  stock_quantity: number,
   quantity: number;
 }
 export type ColumnsProps = {
