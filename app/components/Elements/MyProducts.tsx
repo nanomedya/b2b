@@ -302,7 +302,7 @@ export default function MyProducts() {
                     <TableCell>
                       <Button isIconOnly variant="flat" onPress={onOpen}>
                         <Eye />
-                      </Button>
+                      </Button> 
                     </TableCell>
                     <TableCell>{product.city}</TableCell>
                     <TableCell>{product.barcode}</TableCell>
@@ -314,16 +314,7 @@ export default function MyProducts() {
                         {product.izmir ? "Var" : "Yok"}
                       </Chip>
                     </TableCell>*/}
-                    <TableCell>
-                      <Chip color={product.ankara ? "success" : "danger"}>
-                        {product.ankara ? "Var" : "Yok"}
-                      </Chip>
-                    </TableCell>
-                    <TableCell>
-                      <Chip color={product.istanbul ? "success" : "danger"}>
-                        {product.istanbul ? "Var" : "Yok"}
-                      </Chip>
-                    </TableCell>
+                   
 
                     {/*<TableCell>
                       <Chip color={product.firstIndustry ? "success" : "danger"}>
@@ -437,6 +428,16 @@ export default function MyProducts() {
                       <Tooltip content="Sepete Ekle" className="text-white" color="warning" showArrow>
                         <AddBasket issingle={true} product={product} myquantity={selectedQuantities[product.id] || 1} />
                       </Tooltip>
+                    </TableCell>
+                     <TableCell>
+                      <Chip color={product.quantity > 1 ? "success" : "danger"}>
+                        {product.quantity > 1 ? "Var" : "Yok"}
+                      </Chip>
+                    </TableCell>
+                    <TableCell>
+                      <Chip color={product.stock_quantity > 1 ? "success" : "danger"}>
+                        {product.stock_quantity > 1 ? "Var" : "Yok"}
+                      </Chip>
                     </TableCell>
                   </TableRow>
                 ))}

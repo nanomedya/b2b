@@ -17,6 +17,13 @@
 
 table span{
   text-transform: uppercase!important;
+  font-size: smaller;
+}
+
+table button{
+  font-size: small!important;
+  font-weight: bold!important;
+  margin: 0px 12px;
 }
 
 .bg-warning-100{

@@ -10,10 +10,10 @@ import { Card, CardHeader, CardBody } from "@heroui/card";
 import { Pagination } from "@heroui/pagination";
 import { Heart } from 'react-feather';
 import { useAuth } from "@/context/AuthContext";
-import PageLoader from "../components/Items/PageLoader";
+import PageLoader from "@/app/components/Items/PageLoader";
 import { useEffect, useState } from "react";
-import MyBreadCrumbs from "../components/Items/MyBreadCrumbs";
-import StoriesBox from "../components/Items/StoriesBox";
+import MyBreadCrumbs from "@/app/components/Items/MyBreadCrumbs";
+import StoriesBox from "@/app/components/Items/StoriesBox";
 import { FavoriteProps } from "@/types";
 
 const Favorites = () => {

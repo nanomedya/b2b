@@ -7,7 +7,7 @@ import NavbarWrapper from "@/app/components/Items/NavbarWrapper";
 import { useAuth } from "@/context/AuthContext";
 
 import { useMyAlert } from "@/context/MyAlertContext";
-import PageLoader from "../components/Items/PageLoader";
+import PageLoader from "@/app/components/Items/PageLoader";
 import {  Table,  TableHeader,  TableBody,  TableColumn,  TableRow,  TableCell} from "@heroui/table";
 import {Button, ButtonGroup} from "@heroui/button";
 import {Input} from "@heroui/input";
@@ -17,9 +17,9 @@ import { OrdersProps } from "../../types";
 import moment from "moment";
 import "moment/locale/tr"; 
 import { orders } from "@/api/services/homeServices";
-import MyBreadCrumbs from "../components/Items/MyBreadCrumbs";
+import MyBreadCrumbs from "@/app/components/Items/MyBreadCrumbs";
 import { Search } from "react-feather";
-import StoriesBox from "../components/Items/StoriesBox";
+import StoriesBox from "@/app/components/Items/StoriesBox";
 
 
 
@@ -81,8 +81,10 @@ export default function Orders(): JSX.Element {
     fetchData();
   }, [token, formData]); // formData değiştiğinde yeniden çalıştır
 
+
+
   // Debounce edilen arama sorgusunu izleyerek formData'yı güncelliyoruz
-  useEffect(() => {
+  useEffect(() => {  
     if (debouncedSearchQuery) {
       setFormData((prev) => ({ ...prev, query: debouncedSearchQuery }));
     }
@@ -159,7 +161,7 @@ export default function Orders(): JSX.Element {
                         <TableCell>{order.order_price}</TableCell>
                         <TableCell>{moment(order.order_date).fromNow()}</TableCell>
                         <TableCell>
-                          <Link href={`/order-detail/${order.id}`} passHref>
+                          <Link href={`/orders/${order.id}`} passHref>
                             <Button color="warning" size="sm">
                               Sipariş Detayı
                             </Button>

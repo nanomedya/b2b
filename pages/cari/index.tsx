@@ -7,10 +7,10 @@ import {Button, ButtonGroup} from "@heroui/button";
 import {Card, CardHeader, CardBody, CardFooter} from "@heroui/card";
 import {Chip} from "@heroui/chip";
 import {Tabs, Tab} from "@heroui/tabs";
-import MyBreadCrumbs from "../components/Items/MyBreadCrumbs";
-import StoriesBox from "../components/Items/StoriesBox";
+import MyBreadCrumbs from "@/app/components/Items/MyBreadCrumbs";
+import StoriesBox from "@/app/components/Items/StoriesBox";
 import { useAuth } from "@/context/AuthContext";
-import PageLoader from "../components/Items/PageLoader";
+import PageLoader from "@/app/components/Items/PageLoader";
 
 export default function CariHesap(): JSX.Element {
     const { user, loading } = useAuth();

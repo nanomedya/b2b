@@ -11,7 +11,7 @@ import { useMyAlert } from "@/context/MyAlertContext";
 import {Tabs, Tab} from "@heroui/tabs";
 import {Button, ButtonGroup} from "@heroui/button";
 import {Input} from "@heroui/input";
-import MyBreadCrumbs from "../components/Items/MyBreadCrumbs";
+import MyBreadCrumbs from "@/app/components/Items/MyBreadCrumbs";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/redux/store";
 import { fetchCurrentBasket, removeFromBasketAsync } from "@/redux/basketSlice";

@@ -10,9 +10,9 @@ import {Accordion, AccordionItem} from "@heroui/accordion";
 import {Textarea, Input } from "@heroui/input";
 import { HelpCircle, FileText } from 'react-feather';
 import { useAuth } from "@/context/AuthContext";
-import PageLoader from "../components/Items/PageLoader";
-import MyBreadCrumbs from "../components/Items/MyBreadCrumbs";
-import StoriesBox from "../components/Items/StoriesBox";
+import PageLoader from "@/app/components/Items/PageLoader";
+import MyBreadCrumbs from "@/app/components/Items/MyBreadCrumbs";
+import StoriesBox from "@/app/components/Items/StoriesBox";
 
 const Help = () => {
     const { user, loading } = useAuth();

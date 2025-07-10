@@ -70,8 +70,8 @@ const LoginBox: React.FC<BoxProps> = ({ title }) => {
         });
         setErrors(validationErrors);
       } else {
-        console.error("Sunucu hatası:", err);
-        showAlert("Sunucu Hatası", err?.message || "Bilinmeyen bir hata oluştu.");
+        console.error("Hata:", err.message);
+        showAlert("Hata", err?"Kullanıcı Adı ve/veya şifre yanlış":"");
       }
     } finally {
       setIsLoading(false);

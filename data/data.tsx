@@ -20,8 +20,7 @@ const TABLE_DATA = {
     { name: "Adı", key: "name", sortable: true },
     { name: "Üretici", key: "manufacturer", sortable: false },
     { name: "Oem No", key: "oemNo", sortable: true },
-    { name: "Tedarik", key: "merkez", sortable: false },
-    { name: "Merkez", key: "ankara", sortable: false },
+ 
     //{ name: "İstanbul", key: "istanbul", sortable: false },
     //{ name: "1. Sanayi", key: "first_industry", sortable: false },
     { name: "İskonto", key: "discount", sortable: true },
@@ -30,7 +29,9 @@ const TABLE_DATA = {
     { name: "KDV Hariç", key: "price_excl_vat", sortable: false },
     { name: "KDV Dahil", key: "price_incl_vat", sortable: false },
     { name: "Miktar", key: "quantity", sortable: false },
-    { name: "İşlemler", key: "actions", sortable: false }
+    { name: "İşlemler", key: "actions", sortable: false },
+      { name: "Tedarik", key: "merkez", sortable: false },
+    { name: "Merkez", key: "ankara", sortable: false },
   ],
 };
 

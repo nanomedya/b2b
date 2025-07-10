@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import GuestLayout from "@/app/components/Layouts/GuestLayout";
 import NavbarWrapper from "@/app/components/Items/NavbarWrapper";
 import { useAuth } from "@/context/AuthContext";
-import MyBreadCrumbs from "../components/Items/MyBreadCrumbs";
+import MyBreadCrumbs from "@/app/components/Items/MyBreadCrumbs";
 
 import {Image} from "@heroui/image";
 import {Tooltip} from "@heroui/tooltip";
@@ -15,12 +15,12 @@ import {Card, CardHeader, CardBody, CardFooter} from "@heroui/card";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 
-import AddBasket from "../components/Items/AddBasket";
+import AddBasket from "@/app/components/Items/AddBasket";
 
-import ChooseBasket from "../components/Items/ChooseBasket";
-import MyStorage from "../components/Elements/MyStorage";
-import StoriesBox from "../components/Items/StoriesBox";
-import PageLoader from "../components/Items/PageLoader";
+import ChooseBasket from "@/app/components/Items/ChooseBasket";
+import MyStorage from "@/app/components/Elements/MyStorage";
+import StoriesBox from "@/app/components/Items/StoriesBox";
+import PageLoader from "@/app/components/Items/PageLoader";
 
 export default function Basket(): JSX.Element {
 
@@ -136,11 +136,11 @@ export default function Basket(): JSX.Element {
                           <TableColumn>Tutar</TableColumn>
                           <TableColumn>{"KDV'li Tutar"}</TableColumn>
                           <TableColumn>Miktar</TableColumn>
-                          <TableColumn>Ank.</TableColumn>
-                          <TableColumn>İst.</TableColumn>
                           <TableColumn>Tedarik</TableColumn>
                           <TableColumn>Bakiye</TableColumn>
                           <TableColumn>İşlem</TableColumn>
+                          <TableColumn>Tedarik</TableColumn>
+                          <TableColumn>Merkez</TableColumn>
                         </TableHeader>
                         <TableBody>
                           {basketItems.map((item) => (
@@ -176,24 +176,25 @@ export default function Basket(): JSX.Element {
                               <TableCell>{item.product.total ?? item.product.price}</TableCell>
                               <TableCell>{item.product.totalWithKdv ?? item.product.price * item.product.vat}</TableCell>
                               <TableCell>{item.product.price}</TableCell>
-                              <TableCell>
-                                {item.product?.stocks?.ankara ? (
-                                  <Chip variant="dot" color="success">Var</Chip>
-                                ) : (
-                                  <Chip variant="dot" color="danger">Yok</Chip>
-                                )}
-                              </TableCell>
-                              <TableCell>
-                                {item.product?.stocks?.istanbul ? (
-                                  <Chip variant="dot" color="success">Var</Chip>
-                                ) : (
-                                  <Chip variant="dot" color="danger">Yok</Chip>
-                                )}
-                              </TableCell>
+                              
                               <TableCell>{item.product?.supplierStock}</TableCell>
                               <TableCell>{item.product?.balance}</TableCell>
                               <TableCell>
                                 <AddBasket issingle={false} product={item.product} />
+                              </TableCell>
+                              <TableCell>
+                                {item.product.quantity > 1 ? (
+                                  <Chip variant="dot" color="success">Var</Chip>
+                                ) : (
+                                  <Chip variant="dot" color="danger">Yok</Chip>
+                                )}
+                              </TableCell>
+                              <TableCell>
+                                {item.product.stock_quantity > 1 ? (
+                                  <Chip variant="dot" color="success">Var</Chip>
+                                ) : (
+                                  <Chip variant="dot" color="danger">Yok</Chip>
+                                )}
                               </TableCell>
                             </TableRow>
                           ))}

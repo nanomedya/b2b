@@ -7,12 +7,12 @@ import {Card, CardHeader, CardBody, CardFooter} from "@heroui/card";
 import {Pagination, PaginationItem, PaginationCursor} from "@heroui/pagination";
 
 import { Bell } from "react-feather";
-import NavbarWrapper from "../components/Items/NavbarWrapper";
-import GuestLayout from "../components/Layouts/GuestLayout";
+import NavbarWrapper from "@/app/components/Items/NavbarWrapper";
+import GuestLayout from "@/app/components/Layouts/GuestLayout";
 import Image from "next/image";
-import MyBreadCrumbs from "../components/Items/MyBreadCrumbs";
-import StoriesBox from "../components/Items/StoriesBox";
-import PageLoader from "../components/Items/PageLoader";
+import MyBreadCrumbs from "@/app/components/Items/MyBreadCrumbs";
+import StoriesBox from "@/app/components/Items/StoriesBox";
+import PageLoader from "@/app/components/Items/PageLoader";
 import { useAuth } from "@/context/AuthContext";
 
 const announcements = [

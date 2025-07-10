@@ -3,8 +3,8 @@ import React from "react";
 
 import GuestLayout from "@/app/components/Layouts/GuestLayout";
 import NavbarWrapper from "@/app/components/Items/NavbarWrapper";
-import MyProducts from "../components/Elements/MyProducts";
-import MyBreadCrumbs from "../components/Items/MyBreadCrumbs";
+import MyProducts from "@/app/components/Elements/MyProducts";
+import MyBreadCrumbs from "@/app/components/Items/MyBreadCrumbs";
 
 export default function Search(): JSX.Element {
 

@@ -14,7 +14,7 @@ import { useAuth } from "@/context/AuthContext";
 import { update } from "@/api/services/authService";
 import { updateSchema } from "@/api/utils/validation";
 import { useMyAlert } from "@/context/MyAlertContext";
-import PageLoader from "../components/Items/PageLoader";
+import PageLoader from "@/app/components/Items/PageLoader";
 import { Lock, LogOut, Shield, Smartphone, UserCheck } from "react-feather";
 
 export default function Profile(): JSX.Element {

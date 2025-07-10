@@ -3,7 +3,7 @@ import React from "react";
 
 import GuestLayout from "@/app/components/Layouts/GuestLayout";
 import NavbarWrapper from "@/app/components/Items/NavbarWrapper";
-import MyTable from "../components/Elements/MyProducts";
+import MyTable from "@/app/components/Elements/MyProducts";
 
 export default function Search(): JSX.Element {
 

@@ -1,7 +1,7 @@
 "use client"
 
-import GuestLayout from "../components/Layouts/GuestLayout";
-import NavbarWrapper from "../components/Items/NavbarWrapper";
+import GuestLayout from "@/app/components/Layouts/GuestLayout";
+import NavbarWrapper from "@/app/components/Items/NavbarWrapper";
 import { Input } from "@heroui/input";
 import { Button } from "@heroui/button";
 import { Card, CardHeader, CardBody } from "@heroui/card";
@@ -10,9 +10,9 @@ import { Tabs, Tab } from "@heroui/tabs";
 
 import { useAuth } from "@/context/AuthContext";
 import { useMyAlert } from "@/context/MyAlertContext";
-import PageLoader from "../components/Items/PageLoader";
-import MyBreadCrumbs from "../components/Items/MyBreadCrumbs";
-import StoriesBox from "../components/Items/StoriesBox";
+import PageLoader from "@/app/components/Items/PageLoader";
+import MyBreadCrumbs from "@/app/components/Items/MyBreadCrumbs";
+import StoriesBox from "@/app/components/Items/StoriesBox";
 import { useEffect, useState } from "react";
 import { bankaccounts } from "@/api/services/homeServices";
 
