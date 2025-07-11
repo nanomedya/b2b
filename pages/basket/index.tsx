@@ -209,7 +209,7 @@ export default function Basket(): JSX.Element {
                 )}
               </div>
             </div>
-            <div className="form_wrapper w-full grid grid-cols-2 lg:grid-cols-4 gap-3">
+            <div className="form_wrapper w-full grid grid-cols-3 lg:grid-cols-4 gap-3">
               {depoData.map((depo, index) => (
                 <MyStorage key={index}  {...depo} isActive={selectedTotalPrice < cargoPrice} />
               ))}
