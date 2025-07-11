@@ -136,7 +136,7 @@ export default function Basket(): JSX.Element {
                           <TableColumn>Tutar</TableColumn>
                           <TableColumn>{"KDV'li Tutar"}</TableColumn>
                           <TableColumn>Miktar</TableColumn>
-                          <TableColumn>Tedarik</TableColumn>
+                    
                           <TableColumn>Bakiye</TableColumn>
                           <TableColumn>İşlem</TableColumn>
                           <TableColumn>Tedarik</TableColumn>
@@ -177,13 +177,10 @@ export default function Basket(): JSX.Element {
                               <TableCell>{item.product.totalWithKdv ?? item.product.price * item.product.vat}</TableCell>
                               <TableCell>{item.product.price}</TableCell>
                               
-                              <TableCell>{item.product?.supplierStock}</TableCell>
+                     
                               <TableCell>{item.product?.balance}</TableCell>
                               <TableCell>
-                                <AddBasket issingle={false} product={item.product} />
-                              </TableCell>
-                              <TableCell>
-                                {item.product.quantity > 1 ? (
+                                {item.product.stock > 1 ? (
                                   <Chip variant="dot" color="success">Var</Chip>
                                 ) : (
                                   <Chip variant="dot" color="danger">Yok</Chip>
@@ -196,6 +193,10 @@ export default function Basket(): JSX.Element {
                                   <Chip variant="dot" color="danger">Yok</Chip>
                                 )}
                               </TableCell>
+                              <TableCell>
+                                <AddBasket issingle={false} product={item.product} />
+                              </TableCell>
+                              
                             </TableRow>
                           ))}
                         </TableBody>

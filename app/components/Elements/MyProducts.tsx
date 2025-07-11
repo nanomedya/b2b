@@ -374,6 +374,16 @@ export default function MyProducts() {
                     </TableCell>
 
                     <TableCell>{product.priceInclVat}</TableCell>
+                     <TableCell>
+                      <Chip color={product.quantity > 1 ? "success" : "danger"}>
+                        {product.quantity > 1 ? "Var" : "Yok"}
+                      </Chip>
+                    </TableCell>
+                    <TableCell>
+                      <Chip color={product.stock_quantity > 1 ? "success" : "danger"}>
+                        {product.stock_quantity > 1 ? "Var" : "Yok"}
+                      </Chip>
+                    </TableCell>
                     <TableCell>
                       <div className="flex items-center justify-center">
                         <Button
@@ -429,16 +439,7 @@ export default function MyProducts() {
                         <AddBasket issingle={true} product={product} myquantity={selectedQuantities[product.id] || 1} />
                       </Tooltip>
                     </TableCell>
-                     <TableCell>
-                      <Chip color={product.quantity > 1 ? "success" : "danger"}>
-                        {product.quantity > 1 ? "Var" : "Yok"}
-                      </Chip>
-                    </TableCell>
-                    <TableCell>
-                      <Chip color={product.stock_quantity > 1 ? "success" : "danger"}>
-                        {product.stock_quantity > 1 ? "Var" : "Yok"}
-                      </Chip>
-                    </TableCell>
+                    
                   </TableRow>
                 ))}
               </TableBody>

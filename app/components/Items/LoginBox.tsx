@@ -36,7 +36,8 @@ const LoginBox: React.FC<BoxProps> = ({ title }) => {
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const { name, value } = e.target;
-      setFormData((prev) => ({ ...prev, [name]: value }));
+
+      setFormData((prev) => ({ ...prev, [name]: value.trim() }));
     },
     []
   );
