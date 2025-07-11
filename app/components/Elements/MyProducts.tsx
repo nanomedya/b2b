@@ -155,7 +155,13 @@ const [selectedProduct, setSelectedProduct] = useState<RowsProps | null>(null);
   };
 
   const handleSearch = (query: string, brand: string, instock: "1" | "0") => {
-    setFormData((prev) => ({ ...prev, query, brand, instock }));
+      setFormData((prev) => ({
+    ...prev,
+    query,
+    brand,
+    instock,
+    page: 1, // her aramada sayfa başa döner
+  }));
 
     const currentUrl = new URL(window.location.href);
     currentUrl.searchParams.delete("query");
@@ -581,7 +587,7 @@ const [selectedProduct, setSelectedProduct] = useState<RowsProps | null>(null);
               <span>{selectedProduct.priceExclVat?.value || selectedProduct.list_price} ₺</span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="font-semibold text-[#222]">KDV&#39;li Net Fiyat:</span>
+              <span className="font-semibold text-[#222]">KDV&#39;siz Net Fiyat:</span>
               <span>{selectedProduct.priceInclVat} ₺</span>
             </div>
 
