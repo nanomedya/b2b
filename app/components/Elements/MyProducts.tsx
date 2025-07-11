@@ -577,11 +577,11 @@ const [selectedProduct, setSelectedProduct] = useState<RowsProps | null>(null);
               <span>--</span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="font-semibold">KDV'siz Net Fiyat:</span>
+              <span className="font-semibold">KDV&#39;siz Net Fiyat:</span>
               <span>{selectedProduct.priceExclVat?.value || selectedProduct.list_price} ₺</span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="font-semibold text-[#222]">KDV'li Net Fiyat:</span>
+              <span className="font-semibold text-[#222]">KDV&#39;li Net Fiyat:</span>
               <span>{selectedProduct.priceInclVat} ₺</span>
             </div>
 
