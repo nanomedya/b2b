@@ -46,6 +46,10 @@ export default function MyProducts() {
   const [TableColumns, setTableColumns] = useState<any[]>([]);
   const [newColumnName, setNewColumnName] = useState<any>("");
 
+const [selectedProduct, setSelectedProduct] = useState<RowsProps | null>(null);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+
 
   const [formData, setFormData] = useState({
     query: "",
@@ -247,7 +251,14 @@ export default function MyProducts() {
               <TableBody className="dark:text-white">
 
                 {dataRow.map((product) => (
-                  <TableRow key={product.id} className={checkClass(product)}>
+                  <TableRow
+                    key={product.id}
+                    className={checkClass(product)}
+                    onDoubleClick={() => {
+                      setSelectedProduct(product);
+                      setIsPopupOpen(true);
+                    }}
+                  >
 
                     <TableCell>
                       <Tooltip
@@ -256,8 +267,15 @@ export default function MyProducts() {
                         className="bg-gray-900 text-white"
                         content={
                           <div className="p-2">
-                            <Image width={130} height={130} src={product.image}
-                              fallbackSrc="https://via.placeholder.com/130x130" alt="" />
+                            {product.image ? (
+                                <Image
+                                  width={30}
+                                  height={30}
+                                  src={product.image}
+                                  fallbackSrc="https://via.placeholder.com/130x130"
+                                  alt=""
+                                />
+                              ) : null}
                           </div>
                         }
                       >
@@ -530,6 +548,131 @@ export default function MyProducts() {
 
         </CardBody>
       </Card>
+
+      {isPopupOpen && selectedProduct && (
+  <Modal isOpen={isPopupOpen} onClose={() => setIsPopupOpen(false)}>
+    <ModalContent className="bg-gradient-to-br from-gray-100 to-gray-300 text-black">
+      <ModalHeader className="bg-yellow-300 text-center text-sm font-bold py-2 rounded-t">
+        Sepet Ürün Düzeltme
+      </ModalHeader>
+      <ModalBody className="p-4">
+        <div className="flex flex-col md:flex-row gap-4">
+          {/* Görsel */}
+          <div className="flex justify-center">
+            <img
+              src={selectedProduct.image || "https://via.placeholder.com/150"}
+              alt={selectedProduct.name}
+              className="w-[150px] h-[150px] border border-black"
+            />
+          </div>
+
+          {/* Bilgi */}
+          <div className="flex-1 space-y-1 text-sm">
+            <div className="flex items-center justify-between">
+              <span className="font-semibold">Stok Kodu:</span>
+              <span>{selectedProduct.barcode}</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="font-semibold">İskonto:</span>
+              <span>--</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="font-semibold">KDV'siz Net Fiyat:</span>
+              <span>{selectedProduct.priceExclVat?.value || selectedProduct.list_price} ₺</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="font-semibold text-[#222]">KDV'li Net Fiyat:</span>
+              <span>{selectedProduct.priceInclVat} ₺</span>
+            </div>
+
+            {/* Ürün adı */}
+            <div className="mt-4 font-bold uppercase text-xs leading-5 tracking-wide">
+              {selectedProduct.name}
+            </div>
+
+            {/* OEM Kodları */}
+            {selectedProduct.oemNo && (
+              <div className="mt-2 text-xs font-mono bg-white/70 p-2 rounded border max-h-[80px] overflow-y-auto">
+                {selectedProduct.oemNo
+                  .split(/[\s,;]+/)
+                  .filter(Boolean)
+                  .map((code, idx) => (
+                    <div key={idx}>{code}</div>
+                  ))}
+              </div>
+            )}
+          </div>
+        </div>
+      </ModalBody>
+      <ModalFooter className="flex items-center justify-between px-4 pb-4">
+  {/* İptal Butonu */}
+  <Button
+    color="danger"
+    className="bg-red-600 text-white"
+    onClick={() => setIsPopupOpen(false)}
+  >
+    İptal
+  </Button>
+
+  {/* Miktar Girişi */}
+  <div className="flex items-center justify-center">
+                        <Button
+                          onClick={() => {
+                            const current = quantities[selectedProduct.id] || 1;
+                            if (current > 1) {
+                              handleQuantityChange(selectedProduct.id, String(current - 1));
+                            } else {
+                              handleQuantityChange(selectedProduct.id, "0"); // Veya sıfır değeri, senin mantığına göre
+                            }
+                          }}
+                          radius="sm"
+                          size="sm"
+                          isIconOnly
+                          className="bg-[#fff] dark:bg-slate-700 dark:text-white text-black rounded-l-lg rounded-r-none mr-2"
+                        >
+                          <Minus />
+                        </Button>
+
+                        <Input
+                          value={String(quantities[selectedProduct.id] || 1)}
+                          isDisabled={!selectedProduct.quantity}
+                          isInvalid={errors[selectedProduct.id] || false}
+                          placeholder={`Stok: ${selectedProduct.quantity}`}
+                          min={1}
+                       //   width={100}
+                         // max={product.quantity}
+                         // maxLength={3}
+                        //  className="text-center"
+                         // errorMessage={errors[product.id] ? "Stoktan olmayan bir değer girdiniz" : ""}
+                          onChange={(e) => handleQuantityChange(selectedProduct.id, e.target.value)}
+                        />
+
+                        <Button
+                          onClick={() => {
+                            const current = quantities[selectedProduct.id] || 1;
+
+                              handleQuantityChange(selectedProduct.id, String(current + 1));
+                           
+                          }}
+                          radius="sm"
+                          size="sm"
+                          isIconOnly
+                          className="bg-[#fff] dark:bg-slate-700 dark:text-white text-black rounded-r-lg rounded-l-none  mr-2"
+                        >
+                          <Plus />
+                        </Button>
+                      </div>
+
+  {/* Düzelt Butonu */}
+  <Tooltip content="Sepete Ekle" className="text-white" color="warning" showArrow>
+    <AddBasket issingle={true} product={selectedProduct} myquantity={selectedQuantities[selectedProduct.id] || 1} />
+  </Tooltip>
+</ModalFooter>
+
+    </ModalContent>
+  </Modal>
+)}
+
 
 
     </div>
