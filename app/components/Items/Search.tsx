@@ -6,21 +6,23 @@ import { Button } from "@heroui/button";
 import { Checkbox } from "@heroui/checkbox";
 import { Search } from "react-feather";
 import { carsGroup, storageList } from "@/data/search_data";
-import { brands } from "@/api/services/homeServices";
+import { brands, warehouses  } from "@/api/services/homeServices";
 import { useMyAlert } from "@/context/MyAlertContext";
 import { useAuth } from "@/context/AuthContext";
 
 export default function SearchBox({
   handleSearch,
 }: {
-  handleSearch: (query: string, brand: string,  instock: "0" | "1") => void;
+  handleSearch: (query: string, brand: string, instock: "0" | "1", warehouse_id:string,) => void;
 }): JSX.Element {
   const { user, loading, token } = useAuth();
   const [searchQuery, setSearchQuery] = useState("");
   const [isStorageList, setIsStorageList] = useState(false);
   const [brandData, setBrandData] = useState<any[]>([]);
+  const [warehouseData, setWarehouseData] = useState<any[]>([]);
   const [instock, setInstock] = useState<any>(false);
-    const [selectedBrand, setSelectedBrand] = useState<string | null>(null);
+  const [selectedBrand, setSelectedBrand] = useState<string | null>(null);
+  const [selectedWarehouse, setSelectedWarehouse] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const { showAlert } = useMyAlert();
 
@@ -28,12 +30,13 @@ export default function SearchBox({
   const params = new URLSearchParams();
   if (searchQuery) params.set("query", searchQuery);
   if (selectedBrand) params.set("brand", selectedBrand);
+  if (selectedWarehouse) params.set("warehouse_id", selectedWarehouse);
   if (instock) params.set("instock", "1"); // true ise 1, değilse hiç ekleme
   else params.delete("instock");
 
   const url = `/search?${params.toString()}`;
   window.history.pushState({}, "", url);
-    handleSearch(searchQuery, selectedBrand || "", instock);
+    handleSearch(searchQuery, selectedBrand || "", instock, selectedWarehouse || "" );
 };
 
   useEffect(() => {
@@ -41,7 +44,9 @@ export default function SearchBox({
       try {
         if (token) {
           const response = await brands(token);
+          const response2 = await warehouses(token);
           setBrandData(response.data);
+          setWarehouseData(response2.data)
         }
       } catch (error: any) {
         showAlert("Sunucu Hatası", "Bir hata oluştu. Lütfen tekrar deneyin.");
@@ -56,14 +61,17 @@ export default function SearchBox({
     const query = params.get("query");
     const brand = params.get("brand");
     const instockParam = params.get("instock");
+    const warehouse_id = params.get("warehouse_id");
 
     if (query) setSearchQuery(query);
     if (brand) setSelectedBrand(brand);
+    if (warehouse_id) setSelectedBrand(warehouse_id);
     if (instockParam === "1" || instockParam === "0") setInstock(instockParam);
   }, [token]);
 
   const handleStorageSearch = (value: boolean) => {
     setIsStorageList(value);
+    setSelectedWarehouse(null);
   };
 
   return (
@@ -78,7 +86,7 @@ export default function SearchBox({
             >
             Stoktakiler
             </Checkbox>
-            <Checkbox size="lg" color="warning">Üreticide Ara</Checkbox>
+           {/* <Checkbox size="lg" color="warning">Üreticide Ara</Checkbox>*/}
             <Checkbox size="lg" color="warning" onValueChange={handleStorageSearch}>
               Depolarda Ara
             </Checkbox>
@@ -121,7 +129,7 @@ export default function SearchBox({
                 </SelectItem>
               ))}
             </Select>
-
+{/*
             <Select size="lg" label="Araç Grubu Seç" className="w-48">
               {carsGroup.map((item) => (
                 <SelectItem key={item.key} className="text-gray-600">
@@ -129,14 +137,23 @@ export default function SearchBox({
                 </SelectItem>
               ))}
             </Select>
-
+*/}
             {isStorageList && (
-              <Select size="lg" selectionMode="multiple" label="Depo Seç" className="w-48">
-                {storageList.map((item) => (
-                  <SelectItem key={item.key} className="text-gray-600">
-                    {item.label}
-                  </SelectItem>
-                ))}
+              <Select size="lg"
+              label="Depo Seç"
+              className="w-48"
+              value={selectedWarehouse ?? ""}
+              onChange={(e) => {
+                    const selectedId = e.target.value;
+                    setSelectedWarehouse(selectedId); // bunu mutlaka yap
+                }}
+              isLoading={isLoading}
+            >
+                {warehouseData.map((item) => (
+                <SelectItem key={item.id}  className="text-gray-600">
+                  {item.name}
+                </SelectItem>
+              ))}
               </Select>
             )}
 
@@ -153,7 +170,7 @@ export default function SearchBox({
           </div>
         </Tab>
 
-        <Tab key="tab2" title="Araç Seçerek Ara" className="w-full max-w-screen-md">
+       {/* <Tab key="tab2" title="Araç Seçerek Ara" className="w-full max-w-screen-md">
           <div className="grid grid-flow-row lg:grid-flow-col gap-4 w-full mt-5">
             <Select size="lg" label="Marka" className="max-w-xs">
               <SelectItem key="brand1" className="text-gray-600">Brand 1</SelectItem>
@@ -205,6 +222,7 @@ export default function SearchBox({
             </Button>
           </div>
         </Tab>
+        */}
       </Tabs>
     </div>
   );

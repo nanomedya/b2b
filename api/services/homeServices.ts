@@ -72,6 +72,15 @@ export async function brands(token:any) {
   }
 }
 
+export async function warehouses(token:any) {
+  try {
+    const response = await apiClient("/warehouses", "GET", token);
+    return response;
+  } catch (error) {
+    throw new Error("Hikaye verileri getirilirken bir hata oluştu");
+  }
+}
+
 
 export async function campaigns(token:any) {
   try {

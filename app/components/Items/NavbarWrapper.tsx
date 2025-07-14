@@ -27,11 +27,11 @@ export default function NavbarWrapper(): JSX.Element {
 
   const menuItems = [
     { label: "Anasayfa", href: "/" },
-    { label: "Ürünler", href: "/" },
-    { label: "Siparişler", href: "/", icon: <List /> },
-    { label: "Cari Hesap", href: "/" },
-    { label: "Ödeme Yap", href: "/", icon: <CreditCard /> },
-    { label: "Sepetim", href: "/", icon: <ShoppingCart /> },
+   // { label: "Ürünler", href: "/" },
+   // { label: "Siparişler", href: "/", icon: <List /> },
+   // { label: "Cari Hesap", href: "/" },
+   // { label: "Ödeme Yap", href: "/", icon: <CreditCard /> },
+   // { label: "Sepetim", href: "/", icon: <ShoppingCart /> },
   ];
 
   useEffect(() => {
@@ -77,7 +77,7 @@ export default function NavbarWrapper(): JSX.Element {
         <NavbarBrand className="mr-10">
           <Link href="/">{isDarkMode ? <Logo2 className="h-14" /> : <Logo className="h-14" />}</Link>
         </NavbarBrand>
-
+{/*
         {token && user && (
           <>
             {renderNavItem("/orders", <ShoppingCart />, "Siparişler")}
@@ -85,17 +85,22 @@ export default function NavbarWrapper(): JSX.Element {
             {renderNavItem("/", <PhoneCall />, "İletişim")}
           </>
         )}
+
+        */}
       </NavbarContent>
 
       <NavbarContent className="items-center gap-10" justify="end">
         {token && user && (
           <>
+          {/*
             <Basket />
             {renderNavItem("/pay", <CreditCard />, "Ödeme Yap")}
             <NavbarItem className="hidden lg:flex">
               <Notifications />
             </NavbarItem>
             {renderNavItem("/favorites", <Heart />, "Favoriler")}
+
+            */}
             <Dropdown placement="bottom-end">
               <DropdownTrigger>
                 <div className="flex items-center gap-2 cursor-pointer dark:text-white">
@@ -103,11 +108,11 @@ export default function NavbarWrapper(): JSX.Element {
                     name={user.name}
                     description={user.email}
                     avatarProps={{
-                      src: "https://i.pravatar.cc/150?img=8",
+                      src: "/static/profil.png",
                       isBordered: true,
                       as: "button",
                       color: "warning",
-                      className: "transition-transform",
+                      className: "transition-transform object-contain",
                     }}
                   />
                 </div>

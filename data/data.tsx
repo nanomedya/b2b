@@ -31,7 +31,7 @@ const TABLE_DATA = {
     { name: "Tedarik", key: "merkez", sortable: false },
     { name: "Merkez", key: "ankara", sortable: false },
     { name: "Miktar", key: "quantity", sortable: false },
-    { name: "İşlemler", key: "actions", sortable: false },
+    //{ name: "İşlemler", key: "actions", sortable: false },
 
   ],
 };

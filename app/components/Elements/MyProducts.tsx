@@ -23,7 +23,7 @@ import MyGenelInfoTable from "./MyGenelInfoTable";
 import MyOemTable from "./MyOemTable";
 import MyCarsTable from "./MyCarsTable";
 import MyBrandsTable from "./MyBrandsTable";
-import { productSearch } from "@/api/services/homeServices";
+import { productSearch, warehouses } from "@/api/services/homeServices";
 import { useAuth } from "@/context/AuthContext";
 import AddBasket from "../Items/AddBasket";
 import StoriesBox from "../Items/StoriesBox";
@@ -40,6 +40,8 @@ export default function MyProducts() {
   const [isNewColumnOpen, setIsNewColumnOpen] = useState<boolean>(false);
   const [errors, setErrors] = useState<Record<number, boolean>>({});
 
+  const [isSearchTriggered, setIsSearchTriggered] = useState(false);
+
   const { token } = useAuth();
   const [isLoading, setIsLoading] = React.useState(false);
 
@@ -51,10 +53,13 @@ const [selectedProduct, setSelectedProduct] = useState<RowsProps | null>(null);
 
 
 
+
+
   const [formData, setFormData] = useState({
     query: "",
     brand: "",
     instock: "",
+    warehouse_id: "",
     sort_column: "title",
     sort_direction: "desc",
     page: 1,
@@ -130,8 +135,9 @@ const [selectedProduct, setSelectedProduct] = useState<RowsProps | null>(null);
     const query = params.get("query");
     const brand = params.get("brand");
     const instock = params.get("instock");
+    const warehouse_id = params.get("warehouse_id");
 
-    if (token && query || brand || instock) {
+    if (token && query || brand || instock || warehouse_id) {
       fetchData();
     }
   }, [token, formData, TABLE_DATA]); // FormData değişirse tetiklenir
@@ -154,11 +160,12 @@ const [selectedProduct, setSelectedProduct] = useState<RowsProps | null>(null);
     setIsNewColumnOpen(false);
   };
 
-  const handleSearch = (query: string, brand: string, instock: "1" | "0") => {
+  const handleSearch = (query: string, brand: string, instock: "0" | "1", warehouse_id:string) => {
       setFormData((prev) => ({
     ...prev,
     query,
     brand,
+    warehouse_id,
     instock,
     page: 1, // her aramada sayfa başa döner
   }));
@@ -167,12 +174,15 @@ const [selectedProduct, setSelectedProduct] = useState<RowsProps | null>(null);
     currentUrl.searchParams.delete("query");
     currentUrl.searchParams.delete("brand");
     currentUrl.searchParams.delete("instock");
+    currentUrl.searchParams.delete("warehouse_id");
 
     if (query) currentUrl.searchParams.set("query", query);
     if (brand) currentUrl.searchParams.set("brand", brand);
+    if (warehouse_id) currentUrl.searchParams.set("warehouse_id", warehouse_id);
     if (instock === "1") currentUrl.searchParams.set("instock", "1");
 
     window.history.pushState({}, "", currentUrl.toString());
+     setIsSearchTriggered(true);
   };
 
 
@@ -185,7 +195,7 @@ const [selectedProduct, setSelectedProduct] = useState<RowsProps | null>(null);
 
   const checkClass = (item: any) => {
     let setClass = ' dark:text-white';
-    if (Number(item.quantity) == 0) {
+    if (Number(item.quantity) == 0 && Number(item.stock_quantity) == 0) {
       setClass += ' bg-red-200 dark:bg-red-800 dark:text-white';
     }
     if (Number(item.discount) > 0) {
@@ -399,13 +409,13 @@ const [selectedProduct, setSelectedProduct] = useState<RowsProps | null>(null);
 
                     <TableCell>{product.priceInclVat}</TableCell>
                      <TableCell>
-                      <Chip color={product.quantity > 1 ? "success" : "danger"}>
-                        {product.quantity > 1 ? "Var" : "Yok"}
+                      <Chip color={product.quantity > 0 ? "success" : "danger"}>
+                        {product.quantity > 0 ? "Var" : "Yok"}
                       </Chip>
                     </TableCell>
                     <TableCell>
-                      <Chip color={product.stock_quantity > 1 ? "success" : "danger"}>
-                        {product.stock_quantity > 1 ? "Var" : "Yok"}
+                      <Chip color={product.stock_quantity > 0 ? "success" : "danger"}>
+                        {product.stock_quantity > 0 ? "Var" : "Yok"}
                       </Chip>
                     </TableCell>
                     <TableCell>
@@ -458,16 +468,23 @@ const [selectedProduct, setSelectedProduct] = useState<RowsProps | null>(null);
                       </div>
                     </TableCell>
 
-                    <TableCell>
-                      <Tooltip content="Sepete Ekle" className="text-white" color="warning" showArrow>
+                   {/*  <TableCell>
+                      
+                     <Tooltip content="Sepete Ekle" className="text-white" color="warning" showArrow>
                         <AddBasket issingle={true} product={product} myquantity={selectedQuantities[product.id] || 1} />
                       </Tooltip>
-                    </TableCell>
+                    </TableCell>*/}
                     
                   </TableRow>
                 ))}
               </TableBody>
             </Table>
+          )}
+
+          {dataRow.length === 0 && isSearchTriggered && !isLoading && (
+            <div className="w-full py-10 text-center text-gray-500 dark:text-gray-300">
+              Aradığınız ürün bulunamadı.
+            </div>
           )}
 
           {dataRow.length > 0 && (
@@ -566,9 +583,10 @@ const [selectedProduct, setSelectedProduct] = useState<RowsProps | null>(null);
           {/* Görsel */}
           <div className="flex justify-center">
             <img
-              src={selectedProduct.image || "https://via.placeholder.com/150"}
+              src={selectedProduct.image || "/static/akbay.webp"}
               alt={selectedProduct.name}
-              className="w-[150px] h-[150px] border border-black"
+              className="w-[150px] h-[150px] border border-black object-contain"
+        
             />
           </div>
 

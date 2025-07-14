@@ -125,7 +125,7 @@ export default function Profile(): JSX.Element {
 
                 <CardBody>
                   <div className="relative flex flex-wrap flex-col gap-2 justify-center items-center">
-                    <Avatar src="https://i.pravatar.cc/150?img=8" className="my-2 w-20 h-20 text-large" isBordered color="warning" />
+                    <Avatar src="/static/profil.png" className="my-2 text-large object-contain" style={{width:"200px",height:"200px"}} isBordered color="warning" />
                     <h4 className="font-semibold">{user.name}</h4>
                     <p className="font-normal">{user.email}</p>
 

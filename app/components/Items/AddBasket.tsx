@@ -28,6 +28,7 @@ const AddBasket: React.FC<AddBasketProps> = ({ product, issingle = false, myquan
   const basket = useSelector((state: RootState) => state.basket.items);
   const existingProduct = basket.find((item: BasketItem) => item.productId === product.id);
   const quantity = existingProduct?.quantity ?? 0;
+  const stock_quantity = existingProduct?.stock_quantity ?? 0;
 
   const handleBasketUpdate = (count: number) => {
     const productId = product.id;
@@ -52,8 +53,8 @@ const AddBasket: React.FC<AddBasketProps> = ({ product, issingle = false, myquan
   return (
     <>
       {issingle ? (
-        quantity === 0 ? (
-          !product.quantity ? (
+        quantity === 0 && stock_quantity === 0  ? (
+          !product.quantity && !product.stock_quantity ? (
             <Tooltip
               color="warning"
               showArrow
