@@ -187,7 +187,7 @@ export default function Profile(): JSX.Element {
           <div className="mx-auto container mt-6 px-4 lg:px-0 flex flex-col gap-5">
 
             {/* 2 Faktörlü Doğrulama */}
-            <Card className="w-full lg:max-w-4xl mx-auto">
+            {/*<Card className="w-full lg:max-w-4xl mx-auto">
               <CardHeader className="text-lg font-semibold flex items-center gap-2">
                 <Shield size={20} /> 2 Faktörlü Doğrulama
               </CardHeader>
@@ -202,8 +202,9 @@ export default function Profile(): JSX.Element {
                 )}
               </CardBody>
             </Card>
-
+*/}
             {/* Oturum Yönetimi */}
+            {/*
             <Card className="w-full lg:max-w-4xl mx-auto">
               <CardHeader className="text-lg font-semibold flex items-center gap-2">
                 <Smartphone size={20} /> Oturum Yönetimi
@@ -235,6 +236,7 @@ export default function Profile(): JSX.Element {
                 </Table>
               </CardBody>
             </Card>
+            */}
           </div>
 
 
