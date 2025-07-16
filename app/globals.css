@@ -20,6 +20,9 @@ table span{
   font-size: smaller;
 }
 
+table td{
+     padding:8px 10px !important;
+}
 table button{
   font-size: small!important;
   font-weight: bold!important;

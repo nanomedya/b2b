@@ -28,8 +28,8 @@ const TABLE_DATA = {
     { name: "Liste Fiyatı TL", key: "list_price_tl", sortable: false },
     { name: "KDV Hariç", key: "price_excl_vat", sortable: false },
     { name: "KDV Dahil", key: "price_incl_vat", sortable: false },
-    { name: "Tedarik", key: "merkez", sortable: false },
     { name: "Merkez", key: "ankara", sortable: false },
+    { name: "Tedarik", key: "merkez", sortable: false },
     { name: "Miktar", key: "quantity", sortable: false },
     //{ name: "İşlemler", key: "actions", sortable: false },
 

@@ -409,15 +409,16 @@ const [selectedProduct, setSelectedProduct] = useState<RowsProps | null>(null);
 
                     <TableCell>{product.priceInclVat}</TableCell>
                      <TableCell>
-                      <Chip color={product.quantity > 0 ? "success" : "danger"}>
-                        {product.quantity > 0 ? "Var" : "Yok"}
-                      </Chip>
-                    </TableCell>
-                    <TableCell>
                       <Chip color={product.stock_quantity > 0 ? "success" : "danger"}>
                         {product.stock_quantity > 0 ? "Var" : "Yok"}
                       </Chip>
                     </TableCell>
+                     <TableCell>
+                      <Chip color={product.quantity > 0 ? "success" : "danger"}>
+                        {product.quantity > 0 ? "Var" : "Yok"}
+                      </Chip>
+                    </TableCell>
+                   
                     <TableCell>
                       <div className="flex items-center justify-center">
                         <Button
