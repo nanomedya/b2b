@@ -688,9 +688,11 @@ const [selectedProduct, setSelectedProduct] = useState<RowsProps | null>(null);
                       </div>
 
   {/* Düzelt Butonu */}
+  {/*
   <Tooltip content="Sepete Ekle" className="text-white" color="warning" showArrow>
     <AddBasket issingle={true} product={selectedProduct} myquantity={selectedQuantities[selectedProduct.id] || 1} />
   </Tooltip>
+  */}
 </ModalFooter>
 
     </ModalContent>
