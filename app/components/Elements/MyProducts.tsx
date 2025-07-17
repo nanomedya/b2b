@@ -8,6 +8,7 @@ import { Pagination, PaginationItem, PaginationCursor } from "@heroui/pagination
 import { Tooltip } from "@heroui/tooltip";
 import { Tabs, Tab } from "@heroui/tabs";
 import { Input } from "@heroui/input";
+import { Zap } from "lucide-react";
 import { Spinner } from "@heroui/spinner";
 import { Card, CardHeader, CardBody, CardFooter } from "@heroui/card";
 import { Info, Eye, RefreshCw, Plus, Minus, Trash } from "react-feather";
@@ -357,13 +358,16 @@ const [selectedProduct, setSelectedProduct] = useState<RowsProps | null>(null);
                     </TableCell>*/}
 
                     <TableCell className="text-center">
-                       {product.campaign ? (
-                        <Chip  color="primary" style={{color:"#fff"}}>
-                          {product.campaign}
-                        </Chip>
-                      ) : (
-                        '-'
-                      )}
+                     {product.campaign !== "0.00" ? (
+                     <Chip color="primary" style={{ color: "#fff" }}>
+                      <span style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
+                        <Zap size={16} />
+                        KAMPANYA
+                      </span>
+                    </Chip>
+                    ) : (
+                    ''
+                    )}
                       {product.discount ? (
                         <Chip className="mt-5" color="warning">
                           {product.discount}
