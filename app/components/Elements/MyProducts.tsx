@@ -162,6 +162,7 @@ const [selectedProduct, setSelectedProduct] = useState<RowsProps | null>(null);
   };
 
   const handleSearch = (query: string, brand: string, instock: "0" | "1", warehouse_id:string) => {
+      setIsLoading(true);
       setFormData((prev) => ({
     ...prev,
     query,
@@ -245,6 +246,12 @@ const [selectedProduct, setSelectedProduct] = useState<RowsProps | null>(null);
 
             <SearchBox handleSearch={handleSearch} />
           </div>
+
+          {isLoading && (
+            <div className="flex w-full justify-center items-center py-10">
+              <Spinner color="warning" size="lg" />
+            </div>
+          )}
           {dataRow.length > 0 && (
             <Table aria-label="Ürün Tablosu"
               onSortChange={handleSortChange as any}
