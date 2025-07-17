@@ -356,14 +356,22 @@ const [selectedProduct, setSelectedProduct] = useState<RowsProps | null>(null);
                       </Chip>
                     </TableCell>*/}
 
-                    <TableCell>
+                    <TableCell className="text-center">
+                       {product.campaign ? (
+                        <Chip  color="primary" style={{color:"#fff"}}>
+                          {product.campaign}
+                        </Chip>
+                      ) : (
+                        '-'
+                      )}
                       {product.discount ? (
-                        <Chip color="warning">
+                        <Chip className="mt-5" color="warning">
                           {product.discount}
                         </Chip>
                       ) : (
                         '-'
                       )}
+                     
                     </TableCell>
 
                     <TableCell>

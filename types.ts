@@ -52,6 +52,7 @@ export type RowsProps = {
   name: string;
   manufacturer: string;
   oemNo: string;
+  campaign: string;
   izmir: boolean;
   ankara: boolean;
   istanbul: boolean;
